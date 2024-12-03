@@ -1,0 +1,44 @@
+
+.document-search input[type="text"] {
+    width: 300px; /* Sets a width for the search bar */
+}
+
+.document-search button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.document-search button:hover {
+    background-color: #0056b3;
+}
+
+.document-list {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.document-list div {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.document-list div h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.document-list div p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+}

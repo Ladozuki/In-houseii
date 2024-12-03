@@ -68,3 +68,24 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Brentvale Documentation System
+
+This project is an MVP for handling document management, shipment tracking, customs compliance, and internal workflows. It includes the following features:
+
+- Document management with file uploads, version control, and advanced search.
+- Shipment management and regulatory compliance workflows.
+- Task assignments and internal renewal reminders.
+- A dashboard for analytics and workflow performance tracking.
+- Notifications for document expirations and task due dates.
+
+## Setup Instructions
+
+### Backend
+
+1. Install dependencies:
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   pip install -r requirements.txt
