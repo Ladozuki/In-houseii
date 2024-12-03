@@ -3,6 +3,10 @@ from django.contrib.auth.models import User  # Assuming default Django User mode
 
 # Document Model
 class Document(models.Model):
+
+    class Meta:
+        app_label = 'core'
+        
     DOCUMENT_TYPES = [
         ('customs', 'Customs Document'),
         ('internal', 'Internal Document'),
@@ -68,3 +72,22 @@ class Shipment(models.Model):
 class MetadataSearch(models.Model):
     document = models.OneToOneField(Document, on_delete=models.CASCADE, related_name="metadata_search")
     search_keywords = models.TextField()  # Can store extracted keywords for enhanced searching
+
+# models.py
+class DocumentLink(models.Model):
+    from_document = models.ForeignKey(Document, related_name="linked_from", on_delete=models.CASCADE)
+    to_document = models.ForeignKey(Document, related_name="linked_to", on_delete=models.CASCADE)
+    relationship_type = models.CharField(max_length=100, choices=[('reference', 'Reference'), ('duplicate', 'Duplicate')])
+
+    def __str__(self):
+        return f"{self.from_document.title} linked to {self.to_document.title}"
+    
+    from django.db import models
+
+class Task(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    due_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.name

@@ -15,10 +15,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from . import views
+from django.urls import path, include
+from core import views as core_views  # Import views from core
+from tasks import views as tasks_views  # Import views from tasks
+from core import views as core_views
+
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+    
+#     # Document-related URLs handled by core app
+#     path('documents/', core_views.document_list, name='document_list'),
+#     path('upload/', core_views.document_upload, name='document_upload'),
+    
+#     # Task-related URLs handled by tasks app
+#     path('task/create/', tasks_views.task_create, name='create_task'),
+#     path('tasks/', include('tasks.urls')),  # Task-related URLs handled by tasks app
+    
+#     # Root URL points to task list view from tasks app
+#     path('', tasks_views.task_list, name='home'),  # Default route points to task list view
+
+    
+
+# ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('documents/', views.document_list, name='document_list')
+    path('api/documents/', include('documents.urls')),  # Preferred (Separate app for documents)
+    path('api/shipments/', include('shipments.urls')),  # Preferred (Separate app for shipments)
+    path('api/dashboard/', include('dashboard.urls')),  # Dashboard functionality
+    path('tasks/', include('tasks.urls')),  # Task-related functionality
 ]

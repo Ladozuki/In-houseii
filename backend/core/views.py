@@ -1,11 +1,14 @@
 # views.py
 from django.shortcuts import render
-from .models import Task, Document, Shipment, User
+from core.models import Task, Document, Shipment, User
 from django.db.models import Q
 from django.http import JsonResponse, Http404
 from rest_framework.decorators import api_view
-from .serializers import DocumentSerializer
+from brentvale_project.serializers import DocumentSerializer
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.db import models
 
 # views.py (Stakeholder Access Control)
 from django.contrib.auth.decorators import permission_required
@@ -41,6 +44,14 @@ def view_document(request, document_id):
         raise Http404("Document not found")
     
     return render(request, 'document_detail.html', {'document': document})
+
+@api_view(['GET'])
+def dashboard_data(request):
+    data = {
+        "total_documents": Document.objects.count(),
+        "documents_by_status": Document.objects.values('status').annotate(count=models.Count('status')),
+        "shipments_by_status": Shipment.objects.values('customs_status').annotate(count=models.Count('customs_status')),
+    }
 
 
 @api_view(['POST'])
